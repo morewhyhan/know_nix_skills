@@ -1,77 +1,81 @@
-# Nix Knowledge Compiler
+# 机制原子知识库
 
-这是一个 Nix 哲学启发的知识原子化工程。
+把文章、对话、视频等高冗余文本，拆解为**可以跨领域复用的最小机制单元**。
 
-最终目标不是整理文章，而是把文章、对话、摘录、想法等输入材料，编译成可以长期复用、组合、依赖和演化的 Markdown 知识原子。这个仓库的核心不是“分类”，而是 **可复用知识函数 + 依赖图 + 组件闭包 + 复用优先**。
+## 核心概念
 
-## 当前结论
+**机制原子**不是词语，不是句子，不是笔记卡片。它是一个在足够小的尺度上保留了因果结构、成立条件和迁移边界的**可复用机制**。它可以脱离原领域，在共享同一机制的其他领域中重新绑定对象，生成新的解释、预测和行动判断。
 
-这是一个 Codex skill 驱动的本地工作区系统。你在哪个项目根目录打开 Agent，它就只在那个根目录下创建和维护知识库文件。
+每个机制原子携带四个要素：
 
-核心结构先收敛为一个文件夹：
+1. **机制核** — 到底发生了什么
+2. **参与角色** — 哪些东西参与了这个机制
+3. **成立条件** — 机制在什么条件下运作
+4. **迁移边界** — 它不能被用到哪里、不能乱迁移到哪些领域
+
+## 关键概念
+
+### 脱域
+
+一个原子从原领域中抽离出来，成为跨领域可复用的构件。脱域不是换词造句，不是类比修辞，而是——**它的底层机制真的在新领域里成立**。
+
+例如："固定成本摊薄"机制既可以解释工厂规模经济，也可以解释婚姻中的生活成本分摊、SaaS 的用户增长摊薄研发成本。因为它们共享同一个机制结构：共享固定成本 → 平均成本下降。
+
+### 折叠与展开
+
+任何知识节点都可以在一个尺度上被视为"原子"（折叠/黑箱），在另一个尺度上被视为"系统"（展开为子机制）。没有绝对的"最小单位"——只有相对于当前任务的最小可操作单元。
+
+- **折叠**：把复杂系统压缩成一个可调用节点
+- **展开**：把节点打开，看到内部的角色、条件和子机制
+
+### 多尺度机制网络
+
+知识库不是一棵树，也不是一张平的表。它是**俄罗斯套娃 + 知识图谱 + 复杂网络**。节点之间可以有：
+
+- 向上关系：它属于哪个更大的系统
+- 向下关系：它由哪些更小的机制构成
+- 横向关系：它在哪些领域中成立
+- 斜向关系：它和另一个不同层级的节点存在什么关联
+
+## 知识库的四层结构
 
 ```text
-atoms/
+原始文本（不存入 atoms/）
+  ↓
+领域内容（领域节点，绑定在原领域）
+  ↓
+机制原子（脱域节点，跨领域可复用）← 核心资产
+  ↓
+跨领域绑定（同一机制在不同领域中的角色映射）
 ```
 
-这里的 `atoms/`、`docs/`、`templates/`、`schemas/`、`skills/` 都是相对于当前工作区根目录的路径，不是全局目录。
+## 目录结构
 
-每个 atom 都可以是基础原子，也可以是由其他 atom 组成的大原子。所谓“系统”，不是另一类文件；系统只是 `components` 不为空的高层级 atom。
-
-原始材料不单独建文件。只保留来源指针，写进 atom 的 `source` 字段。原文、对话、摘录只是输入，不是知识资产。
-
-## 最小字段
-
-每个 atom 最少保留：
-
-```yaml
-id:
-status:
-source:
-depends_on:
-components:
+```text
+atoms/          ← 所有原子的存放处
+docs/           ← 系统规则与操作文档
+schemas/        ← 最小 frontmatter schema
+templates/      ← 原子模板
+skills/         ← AI 编译器 skill 定义
 ```
-
-- `id`：稳定身份，不能靠标题引用。
-- `status`：维护状态，支持草稿、稳定、废弃、合并。
-- `source`：来源指针，不必保存全文。
-- `depends_on`：理解或使用当前 atom 需要哪些前置 atom。
-- `components`：当前 atom 由哪些下层 atom 组成。
-
-能从依赖图推出来的东西不手写：`used_by`、`reuse_count`、`closure`、`part_of`、`system_scope` 都不保留。
-
-## 必要规则
-
-字段足够少，但系统必须有一组运行规则。
-
-1. **构建规则**：输入材料进入后，AI 必须按统一标准判断候选内容是否值得成为 atom，太大则拆，太碎则并入说明，不够复用则不建。
-2. **复用优先**：创建新 atom 前，必须先查旧 atom。能被旧 atom 准确承载，就复用旧 atom，不新建。
-3. **写入安全**：新 atom 默认是 `draft`，通过质量门、硬校验和整批验收后才能 `stable`。
-4. **失败不入库**：不合格候选直接丢弃或并入正文说明，不创建 `rejected` atom，也不为失败候选建文件。
-5. **地基补齐**：新建上层 atom 前，必须确认它的前置原理已存在；缺少底层学科原理时，先补齐地基 atom，再创建上层 atom。
-6. **AI 调用协议**：未来任务先检索相关 atom，再按需要展开 `depends_on` 或 `components`，避免读取无关图谱。
-
-复利来自第二条：旧 atom 降低新知识的处理成本，并被未来任务反复组合调用。
-
-## 文档入口
-
-- `docs/00-system-brief.md`：最小系统说明。
-- `docs/01-nix-mapping.md`：Nix 思想如何映射到本工程。
-- `docs/02-atom-standard.md`：什么内容有资格成为 atom。
-- `docs/03-relation-semantics.md`：保留哪些正向关系。
-- `docs/04-compile-workflow.md`：输入材料如何编译成 atom。
-- `docs/05-quality-gates.md`：质量检查规则。
-- `docs/06-build-decision-rules.md`：复用、新建、升级、拆分、合并、丢弃的判定规则。
-- `docs/07-operation-modes-and-safety.md`：skill 模式、写入安全、硬校验、事务规则。
-- `docs/08-reuse-search.md`：旧 atom 检索、复用判断、别名、来源保存边界。
-- `docs/09-id-lifecycle-iteration.md`：ID、版本、生命周期、可观察、迭代、冲突、循环规则。
-- `docs/10-usage-experience-and-validation.md`：AI 调用、整批验收、系统 atom、Obsidian 展示。
-- `docs/11-goal-contract.md`：最终目标、v0 交付物、成功标准和失败标准。
-- `docs/12-foundation-grounding.md`：底层学科地基、前置依赖补齐和逐层追溯规则。
-- `templates/knowledge-atom.md`：最小 atom 模板。
-- `schemas/atom-frontmatter.yaml`：最小 frontmatter schema。
-- `skills/nix-knowledge-compiler/`：Codex skill 文件。
 
 ## 一句话
 
-最终只保留 atom。每个 atom 有 ID、状态、来源、依赖、组成。其他能从图里推出来的东西都不写。失败候选不进入 atom store。
+> 这个知识库不是保存内容，而是从内容中提取可迁移的机制原子。
+
+## 文档入口
+
+- `docs/00-system-brief.md`：最小系统说明
+- `docs/02-atom-standard.md`：什么内容有资格成为机制原子
+- `docs/03-relation-semantics.md`：关系语义与多尺度网络
+- `docs/04-compile-workflow.md`：输入材料如何编译成机制原子
+- `docs/05-quality-gates.md`：质量检查规则
+- `docs/06-build-decision-rules.md`：复用、新建、升级、拆分、合并、丢弃的判定规则
+- `docs/11-goal-contract.md`：最终目标与 v0 交付物
+- `docs/12-foundation-grounding.md`：底层学科地基
+- `templates/knowledge-atom.md`：机制原子模板
+- `schemas/atom-frontmatter.yaml`：最小 frontmatter schema
+
+## 参考来源
+
+本工程的构建思想受 Nix 的可靠构建模型启发（稳定身份、来源可追溯、正向依赖显式、图上计算闭包、复用优先），但其知识理论内核来自信息论、系统论、复杂系统、知识表示与语义网络。

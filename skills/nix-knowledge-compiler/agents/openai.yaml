@@ -1,4 +1,4 @@
 interface:
-  display_name: "Nix Knowledge Compiler"
-  short_description: "把文章、对话和摘录编译成输入语言一致、可调用、可链接、可追溯到底层原理的知识函数 atom。"
-  default_prompt: "使用 Nix Knowledge Compiler 处理这段材料；先抽取可复用知识函数，写清输入、操作、输出；新建上层 atom 前先检查地基，缺少底层学科原理 atom 时先补地基，再让上层 atom 通过 components/depends_on 追溯到底层基础 atom；文件名、ID、标题和正文标题必须跟随输入语言。"
+  display_name: "Mechanism Atom Compiler"
+  short_description: "把文章、对话和摘录编译为可脱域、可跨领域复用的机制原子。区分领域内容与机制内容，提取机制核、参与角色、成立条件和迁移边界，验证跨领域迁移有效性。"
+  default_prompt: "使用 Mechanism Atom Compiler 处理这段材料。先分离领域内容与机制内容——把领域专属词替换为抽象角色，检查机制是否仍然完整。对机制内容，提取机制核（因果链或结构约束）、参与角色（哪些东西参与）、成立条件（在什么条件下运作）、迁移边界（什么时候不适用、不能迁移到哪里）。判断脱域可能性：能在至少一个其他领域验证机制迁移吗？迁移后能生成有效判断而不仅是换词造句吗？创建领域绑定表。检索已有原子（含跨领域同构检索）。文件名、ID、标题和正文标题必须跟随输入语言。"

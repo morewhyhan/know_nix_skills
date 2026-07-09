@@ -1,9 +1,9 @@
-# v0.3 minimal atom frontmatter schema
+# v0.4 mechanism atom frontmatter schema
 
 required:
   id:
     description: Stable atom identifier in the source material's main language. Chinese input should use a Chinese ID, not an English slug.
-    example: 关系行为惯性-v1
+    example: 固定成本摊薄-v1
   status:
     description: Maintenance state.
     allowed:
@@ -12,7 +12,7 @@ required:
       - deprecated
       - merged
   source:
-    description: Source pointer. It does not need to contain the full original material.
+    description: Source pointer. Does not need to contain full original material.
     suggested_fields:
       - type
       - title
@@ -22,8 +22,16 @@ required:
     description: Atom IDs required to understand or use this atom.
     type: list
   components:
-    description: Lower-level atom IDs that compose this atom. Empty list means primitive atom.
+    description: Lower-level atom IDs that compose this atom. Empty list means base atom.
     type: list
+
+optional:
+  domain:
+    description: For domain-bound atoms, the domain this atom belongs to. Leave empty or omit for de-domain atoms.
+    example: 手冲咖啡
+  de_domain:
+    description: Whether this atom has been extracted as a cross-domain reusable mechanism. true for mechanism atoms that can rebind to multiple domains.
+    type: boolean
 
 forbidden_in_core:
   - type
@@ -49,3 +57,5 @@ merged_rule: When status is merged, write the target atom and merge reason in th
 identity_rule: File name must equal id plus ".md".
 
 stability_rule: New atoms start as draft. Mark stable only after quality gates, hard validation, and batch validation pass.
+
+mechanism_rule: Mechanism atoms must have mechanism core, participating roles, activation conditions, and migration boundaries written in the body. These do not need separate frontmatter fields.
