@@ -49,7 +49,7 @@ depends_on:
 components:
 ```
 
-`source` 为扁平字符串，直接写来源路径或引用。不使用嵌套字段（如 `type`、`title`、`date`、`locator`）。
+`source` 写入来源材料的路径或引用标识，如 `01-文章/爱戏剧的柏拉图/001_看完你将认清婚姻4大真相.md`。
 
 不添加 type、object_kind、level、content_shape、system_scope、related、reverse links、reuse count、closure 等字段。
 
