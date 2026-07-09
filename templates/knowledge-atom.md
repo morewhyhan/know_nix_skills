@@ -3,12 +3,12 @@ id: 概念短名称
 status: draft
 source: 来源路径或引用
 tags:
-  - clc/码
-  - 方向名
-  - type/原子类型
+  - F0/经济学
 aliases:
   - 别名1
   - 别名2
+  - 别名3
+  - 别名4
 depends_on: []
 components: []
 ---
