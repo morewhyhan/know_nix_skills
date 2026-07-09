@@ -45,7 +45,6 @@
 id:
 status:
 source:
-clc:
 tags:
 aliases:
 depends_on:
@@ -53,7 +52,6 @@ components:
 ```
 
 `source` 写入来源材料的路径或引用标识。
-`clc` 写入 CLC 码和方向名，如 `F0 经济学`。领域节点写 `领域节点`。
 `tags` 用于 Obsidian 标签面板筛选，含 `clc/码`、方向名、`type/原子类型`。
 `aliases` 取自必要说明中的常见别名，使别名搜索和 `[[别名]]` wikilink 在 Obsidian 中生效。
 
