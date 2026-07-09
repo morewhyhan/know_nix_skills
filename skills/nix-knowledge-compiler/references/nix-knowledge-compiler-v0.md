@@ -52,8 +52,8 @@ components:
 ```
 
 `source` 写入来源材料的路径或引用标识。
-`tags` 用于 Obsidian 标签面板筛选，含 `clc/码`、方向名、`type/原子类型`。
-`aliases` 取自必要说明中的常见别名，使别名搜索和 `[[别名]]` wikilink 在 Obsidian 中生效。
+`tags` 用于 Obsidian 标签面板筛选。每个原子固定包含：`clc/码`（如 `clc/F0`）+ 方向名（如 `经济学`）+ `type/原子类型`（`type/机制原子` / `type/概念原子` / `type/领域节点`）。标签面板中层叠展示，点击可筛选。
+`aliases` 取自必要说明的常见别名。每个原子至少 2 个。Obsidian 搜索和 `[[别名]]` wikilink 自动解析指向本原子。
 
 不添加 type、object_kind、level、content_shape、system_scope、related、reverse links、reuse count、closure 等字段。
 
