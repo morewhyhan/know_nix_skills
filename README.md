@@ -73,6 +73,7 @@ skills/         ← AI 编译器 skill 定义
 - `docs/06-build-decision-rules.md`：复用、新建、升级、拆分、合并、丢弃的判定规则
 - `docs/11-goal-contract.md`：最终目标与 v0 交付物
 - `docs/12-foundation-grounding.md`：前置概念补齐（确保引用的每个概念都有清晰定义）
+- `docs/clc-reference.md`：中国图书馆分类法（CLC）完整类目结构参考
 - `templates/knowledge-atom.md`：机制原子模板
 - `schemas/atom-frontmatter.yaml`：最小 frontmatter schema
 
