@@ -216,11 +216,11 @@ components:
 
 ```markdown
 ## 组件
-- [[语义单位-v1]] - composed_of：知识原子的构件
-- [[可复用-v1]] - composed_of：知识原子必须可复用
+- [[语义单位]] - composed_of：知识原子的构件
+- [[可复用]] - composed_of：知识原子必须可复用
 
 ## 依赖
-- [[机会成本-v1]] - prerequisite：不理解机会成本就无法理解此处的权衡
+- [[机会成本]] - prerequisite：不理解机会成本就无法理解此处的权衡
 ```
 
 ## Step 15：建立本批原子间关系

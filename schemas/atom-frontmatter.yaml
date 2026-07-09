@@ -3,7 +3,7 @@
 required:
   id:
     description: Stable atom identifier in the source material's main language. Chinese input should use a Chinese ID, not an English slug.
-    example: 固定成本摊薄-v1
+    example: 固定成本摊薄
   status:
     description: Maintenance state.
     allowed:

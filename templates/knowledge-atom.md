@@ -1,5 +1,5 @@
 ---
-id: 概念短名称-v1
+id: 概念短名称
 status: draft
 source:
   type: conversation
