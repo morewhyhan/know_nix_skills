@@ -155,7 +155,7 @@ components:
 11. 有生命周期：按 `docs/09-id-lifecycle-iteration.md` 演化。
 12. 有使用协议：按 `docs/10-usage-experience-and-validation.md` 执行。
 13. 有目标契约：按 `docs/11-goal-contract.md` 判断 v0 是否完成。
-14. 有地基补齐：按 `docs/12-foundation-grounding.md` 补齐底层学科原理。
+14. 有前置概念补齐：按 `docs/12-foundation-grounding.md` 补齐上层机制引用的未定义概念。
 
 ## 参考来源
 
