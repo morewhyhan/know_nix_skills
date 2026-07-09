@@ -2,6 +2,7 @@
 id: 概念短名称
 status: draft
 source: 来源路径或引用
+clc: CLC码 方向名
 depends_on: []
 components: []
 ---

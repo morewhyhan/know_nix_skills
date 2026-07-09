@@ -50,11 +50,13 @@ atoms/
 id:
 status:
 source:
+clc:
 depends_on:
 components:
 ```
 
 `source` 写入来源材料的路径或引用标识，如 `01-文章/爱戏剧的柏拉图/001_看完你将认清婚姻4大真相.md`。
+`clc` 写入 CLC 码和方向名，如 `F0 经济学`、`社会心理学`。领域节点写 `领域节点`。
 
 不要写能从图里推出来的字段：`used_by`、`reuse_count`、`part_of`、`closure`、`type`、`related` 等。
 
