@@ -129,12 +129,17 @@ components: []
 
 ## 依赖
 
+> 此节必须与 frontmatter `depends_on` 一致。使用 `[[atom-id]] - 语义关系类型：理由` 格式。即使为空也必须写"无"。
+
 - 无
-- 如果有依赖，写成：`[[依赖atom-id]] - 为什么理解当前原子必须先理解它`
-- 前置概念也通过这里链接
+- 如果有依赖，写成：`[[依赖atom-id]] - prerequisite：为什么必须先理解它`
+- 语义关系类型：prerequisite / defined_by / grounded_in / supports / constrains / explains
 
 ## 组件
 
+> 此节必须与 frontmatter `components` 一致。使用 `[[atom-id]] - 语义关系类型：理由` 格式。即使为空也必须写"无"。
+
 - 无
-- 如果有组件，写成：`[[组件atom-id]] - 它承担当前原子的哪一部分结构或能力`
+- 如果有组件，写成：`[[组件atom-id]] - composed_of：它承担当前原子的哪一部分`
+- 语义关系类型：composed_of / implements / instantiates
 - 复合原子的组件链必须能追溯到 `components: []` 的基础原子
