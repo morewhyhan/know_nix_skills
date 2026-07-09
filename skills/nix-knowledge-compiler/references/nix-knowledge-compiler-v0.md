@@ -53,7 +53,7 @@ components:
 
 `source` 写入来源材料的路径或引用标识。
 `tags` 即 CLC 分类，格式 `码/方向名`，如 `F0/经济学`。多数原子一个标签，跨领域机制可有多个。
-`aliases` 取自必要说明的常见别名，每个原子至少 4 个，控制在 4-6 个。覆盖：原文同义表述、俗称简称、学术同义词、读者可能用到的反向检索词。Obsidian 搜索和 `[[别名]]` wikilink 自动解析指向本原子。
+`aliases` 取自必要说明的常见别名，每个原子 2-6 个。覆盖：原文同义表述、俗称简称、学术同义词、读者可能用到的反向检索词。Obsidian 搜索和 `[[别名]]` wikilink 自动解析指向本原子。
 
 不添加 type、object_kind、level、content_shape、system_scope、related、reverse links、reuse count、closure 等字段。
 
