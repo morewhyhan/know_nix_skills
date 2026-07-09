@@ -122,6 +122,43 @@ components:
 
 按 `docs/06-build-decision-rules.md` 判断。
 
+## 分层构建
+
+原子不按主题分类，按**构造层级**分层。上层只能引用下层，不能跨层。
+
+```text
+L0 基础概念    components: []  不可再拆的概念/属性/操作
+L1 基础关系    components→L0   最简单的三元组（A→关系→B）
+L2 组合概念    components→L0/L1 由基础概念和关系组合
+L3 机制原子    components→L0/L1/L2 携带完整四要素
+L4 命题        depends_on→L2/L3 一个完整判断
+L5 复合系统    components→L3/L4 多机制多命题的系统
+```
+
+创建每个原子时必须判断层级。检查：components 是否都处于严格低于当前层？depends_on 目标是否不高于当前层？
+
+## 语义关系
+
+`depends_on` 和 `components` 只说"有关系"，不说"什么关系"。语义类型标注在 wikilink 中，不新增字段：
+
+```markdown
+- [[atom-id]] - 关系类型：理由
+```
+
+结构语义（components 中）：`composed_of` | `implements` | `instantiates`
+认知语义（depends_on 中）：`prerequisite` | `defined_by` | `grounded_in`
+逻辑语义（任意）：`supports` | `constrains` | `explains` | `contrasts_with`
+
+选择规则：先判断是 components 还是 depends_on，再选语义子类型。
+
+## 本批原子关系
+
+所有本批原子写入后，两两检查是否存在 depends_on / components / supports / constrains / explains / contrasts_with / instantiates。同批创建的领域节点与脱域机制之间必须建立 instantiates。对称机制（"不足→X"和"过度→Y"）必须建立 contrasts_with。
+
+## 涌现验证
+
+编译结束后，检查这批原子能否组合出原文没有的新判断。能 → 在结果说明中写出涌现路径 `[atom_X] + [atom_Y] → "新判断"`。连续多次零涌现 → 可能只在做摘要。
+
 ## 跨领域迁移验证
 
 判断一个机制原子能否迁移到新领域：
