@@ -54,6 +54,8 @@ depends_on:
 components:
 ```
 
+`source` 为扁平字符串，直接写来源路径或引用（如 `01-文章/爱戏剧的柏拉图/001_看完你将认清婚姻4大真相.md`），不使用嵌套字段。
+
 不要写能从图里推出来的字段：`used_by`、`reuse_count`、`part_of`、`closure`、`type`、`related` 等。
 
 ## 核心本体

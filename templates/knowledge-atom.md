@@ -1,11 +1,7 @@
 ---
 id: 概念短名称
 status: draft
-source:
-  type: conversation
-  title: 来源标题
-  date: 2026-07-06
-  locator: 来源定位
+source: 来源路径或引用
 depends_on: []
 components: []
 ---

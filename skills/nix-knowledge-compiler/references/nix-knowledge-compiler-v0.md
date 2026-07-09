@@ -49,6 +49,8 @@ depends_on:
 components:
 ```
 
+`source` 为扁平字符串，直接写来源路径或引用。不使用嵌套字段（如 `type`、`title`、`date`、`locator`）。
+
 不添加 type、object_kind、level、content_shape、system_scope、related、reverse links、reuse count、closure 等字段。
 
 ## 决策顺序
