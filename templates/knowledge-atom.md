@@ -3,6 +3,13 @@ id: 概念短名称
 status: draft
 source: 来源路径或引用
 clc: CLC码 方向名
+tags:
+  - clc/码
+  - 方向名
+  - type/原子类型
+aliases:
+  - 别名1
+  - 别名2
 depends_on: []
 components: []
 ---
