@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nix Knowledge Compiler"
+  short_description: "把文章、对话和摘录编译成输入语言一致、可调用、可链接、可追溯到底层原理的知识函数 atom。"
+  default_prompt: "使用 Nix Knowledge Compiler 处理这段材料；先抽取可复用知识函数，写清输入、操作、输出；新建上层 atom 前先检查地基，缺少底层学科原理 atom 时先补地基，再让上层 atom 通过 components/depends_on 追溯到底层基础 atom；文件名、ID、标题和正文标题必须跟随输入语言。"

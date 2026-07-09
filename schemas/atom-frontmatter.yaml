@@ -1,0 +1,51 @@
+# v0.3 minimal atom frontmatter schema
+
+required:
+  id:
+    description: Stable atom identifier in the source material's main language. Chinese input should use a Chinese ID, not an English slug.
+    example: 关系行为惯性-v1
+  status:
+    description: Maintenance state.
+    allowed:
+      - draft
+      - stable
+      - deprecated
+      - merged
+  source:
+    description: Source pointer. It does not need to contain the full original material.
+    suggested_fields:
+      - type
+      - title
+      - date
+      - locator
+  depends_on:
+    description: Atom IDs required to understand or use this atom.
+    type: list
+  components:
+    description: Lower-level atom IDs that compose this atom. Empty list means primitive atom.
+    type: list
+
+forbidden_in_core:
+  - type
+  - object_kind
+  - level
+  - content_shape
+  - system_scope
+  - used_by
+  - reuse_count
+  - feedback
+  - part_of
+  - closure
+  - related
+  - see_also
+  - replaces
+  - replaced_by
+  - merge_note
+
+rule: If a value can be inferred from the folder, dependency graph, reverse references, or atom body, do not write it as atom frontmatter.
+
+merged_rule: When status is merged, write the target atom and merge reason in the body, not in frontmatter.
+
+identity_rule: File name must equal id plus ".md".
+
+stability_rule: New atoms start as draft. Mark stable only after quality gates, hard validation, and batch validation pass.
