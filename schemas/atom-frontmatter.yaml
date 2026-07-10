@@ -1,61 +1,75 @@
-# v0.4 mechanism atom frontmatter schema
+# v1.1 canonical atom frontmatter JSON Schema (YAML form)
 
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "Nix Knowledge Atom Frontmatter"
+type: object
+additionalProperties: false
 required:
+  - id
+  - status
+  - source
+  - tags
+  - aliases
+  - depends_on
+  - components
+
+properties:
   id:
-    description: Stable atom identifier in the source material's main language. Chinese input should use a Chinese ID, not an English slug.
-    example: 固定成本摊薄
+    type: string
+    minLength: 1
+    description: Stable identifier in the source language; prefer an exact established disciplinary term, then colloquial language, then a descriptive phrase, and use a coined term only as a last resort. The file name must equal id plus .md.
   status:
-    description: Maintenance state.
-    allowed:
+    type: string
+    enum:
       - draft
       - stable
       - deprecated
       - merged
   source:
-    description: Source pointer. Does not need to contain full original material.
-    suggested_fields:
-      - type
-      - title
-      - date
-      - locator
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string
+      minLength: 1
+    description: Every item must be a resolvable absolute path, workspace-relative path, or URL.
+  tags:
+    type: array
+    minItems: 1
+    maxItems: 3
+    uniqueItems: true
+    items:
+      type: string
+      minLength: 1
+    description: One to three CODE/CLC-official-name navigation values selected after scanning all 22 CLC basic classes.
+  aliases:
+    type: array
+    minItems: 2
+    maxItems: 6
+    uniqueItems: true
+    items:
+      type: string
+      minLength: 1
+    description: Searchable professional variants, source wording, and at least one expression ordinary readers would actually use.
   depends_on:
-    description: Atom IDs required to understand or use this atom.
-    type: list
+    type: array
+    uniqueItems: true
+    items:
+      type: string
+      minLength: 1
+    description: Atom IDs strictly required to understand or invoke this atom.
   components:
-    description: Lower-level atom IDs that compose this atom. Empty list means base atom.
-    type: list
+    type: array
+    uniqueItems: true
+    items:
+      type: string
+      minLength: 1
+    description: Lower-level atom IDs whose composition creates this system atom; an empty list marks a complete base atom.
 
-optional:
-  domain:
-    description: For domain-bound atoms, the domain this atom belongs to. Leave empty or omit for de-domain atoms.
-    example: 手冲咖啡
-  de_domain:
-    description: Whether this atom has been extracted as a cross-domain reusable mechanism. true for mechanism atoms that can rebind to multiple domains.
-    type: boolean
-
-forbidden_in_core:
-  - type
-  - object_kind
-  - level
-  - content_shape
-  - system_scope
-  - used_by
-  - reuse_count
-  - feedback
-  - part_of
-  - closure
-  - related
-  - see_also
-  - replaces
-  - replaced_by
-  - merge_note
-
-rule: If a value can be inferred from the folder, dependency graph, reverse references, or atom body, do not write it as atom frontmatter.
-
-merged_rule: When status is merged, write the target atom and merge reason in the body, not in frontmatter.
-
-identity_rule: File name must equal id plus ".md".
-
-stability_rule: New atoms start as draft. Mark stable only after quality gates, hard validation, and batch validation pass.
-
-mechanism_rule: Mechanism atoms must have mechanism core, participating roles, activation conditions, and migration boundaries written in the body. These do not need separate frontmatter fields.
+x-rules:
+  identity: File name must equal id plus .md.
+  exact_fields: No frontmatter keys other than the seven properties above are allowed.
+  new_atom_status: New atoms start as draft.
+  relations: Every target must exist; body dependency and component wikilinks must exactly match frontmatter.
+  evidence: Every atom must distinguish source support, compiler inference, pending validation, naming basis, domain-binding validation state, and independent semantic review state.
+  stable: Stable atoms must pass deterministic and independent semantic review, cite at least two locally resolvable source files with distinct identities and content hashes, and satisfy the evidence threshold in the v1.1 contract.
