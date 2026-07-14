@@ -1,0 +1,9 @@
+version: "0.1"
+store_root: knowledge
+paths:
+  reconstructions: knowledge/reconstructions
+  mechanisms: knowledge/mechanisms
+  systems: knowledge/systems
+  analyses: knowledge/analyses
+  runs: knowledge/runs
+skill: skills/mechanism-network-builder

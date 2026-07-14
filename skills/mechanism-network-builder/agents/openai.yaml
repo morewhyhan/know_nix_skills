@@ -1,0 +1,4 @@
+interface:
+  display_name: "机制网络构建器"
+  short_description: "把零散文本编译成可复用、可组合、可追溯的机制知识网络"
+  default_prompt: "使用 $mechanism-network-builder 把这段材料整理成可复用的机制卡，并维护我的 Obsidian 机制网络。"

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Autonomous Mechanism Atom Compiler"
-  short_description: "全自动还原原文并按完整 CLC 编译可复用机制知识库"
-  default_prompt: "Use $nix-knowledge-compiler to reconstruct this source, search the full CLC space, and compile validated reusable mechanism atoms."
